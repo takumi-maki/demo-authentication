@@ -1,13 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+
 class AddPostPage extends StatefulWidget {
-  const AddPostPage({Key? key}) : super(key: key);
+  const AddPostPage(this.user, {Key? key}) : super(key: key);
+  final User user;
 
   @override
   State<AddPostPage> createState() => _AddPostPageState();
 }
 
 class _AddPostPageState extends State<AddPostPage> {
+  String messageText = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,11 +21,41 @@ class _AddPostPageState extends State<AddPostPage> {
         title: const Text('チャット投稿'),
       ),
       body: Center(
-        child: ElevatedButton(
-          child: const Text('戻る'),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+        child: Container(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextFormField(
+                decoration: const InputDecoration(labelText: '投稿メッセージ'),
+
+                keyboardType: TextInputType.multiline,
+                maxLines: 3,
+                onChanged: (String value) {
+                  setState(() {
+                    messageText = value;
+                  });
+                },
+              ),
+              const SizedBox(height: 8),
+              Container(
+                width: double.infinity,
+                child: ElevatedButton(
+                  child: const Text('投稿'),
+                  onPressed: () async {
+                    final date = DateTime.now().toIso8601String();
+                    final email = widget.user.email;
+                    await FirebaseFirestore.instance.collection('posts').doc().set({
+                      'text': messageText,
+                      'email': email,
+                      'date': date,
+                    });
+                    Navigator.of(context).pop();
+                  },
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

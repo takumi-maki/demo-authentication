@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "178894714744",
+    "project_id": "fir-demo-authentication",
+    "storage_bucket": "fir-demo-authentication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:178894714744:android:1515f65d71b41559c1fa8d",
+        "android_client_info": {
+          "package_name": "com.example.demo_authentication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "178894714744-oav2mvo5ed5h10c9261rfe477grb125b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByjAbYWgJiIOW8rhsZCr8XkaTw9awKFr0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "178894714744-oav2mvo5ed5h10c9261rfe477grb125b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "178894714744-7qm7fqi8uhh3tdgsih2arfl35qav75cc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.demoAuthentication"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

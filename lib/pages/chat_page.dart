@@ -12,7 +12,6 @@ class ChatPage extends StatefulWidget {
   @override
   State<ChatPage> createState() => _ChatPageState();
 }
-
 class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
@@ -40,35 +39,38 @@ class _ChatPageState extends State<ChatPage> {
             padding: const EdgeInsets.all(8),
             child: Text('ログイン情報: ${widget.user.email}'),
           ),
-          Expanded(child: FutureBuilder<QuerySnapshot>(
-            future: FirebaseFirestore.instance.collection('posts').orderBy('date').get(),
-            builder: (context, snapshot) {
-              if(snapshot.hasData) {
-                final List<DocumentSnapshot> documents = snapshot.data!.docs;
-                return ListView(
-                  children: documents.map((document) {
-                    return Card(
-                      child: ListTile(
-                        title: Text(document['text']),
-                        subtitle: Text(document['email']),
-                        // 自分の投稿の場合は、メッセージの削除ボタンを表示
-                        trailing: document['email'] == widget.user.email
-                            ? IconButton(
-                              icon: const Icon(Icons.delete),
-                              onPressed: () async {
-                                await FirebaseFirestore.instance.collection('posts').doc(document.id).delete();
-                          },
-                        ) : null,
-                      ),
-                    );
-                  }).toList(),
+          Expanded(
+              child: StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance.collection('posts').orderBy('date').snapshots(),
+                builder: (context, snapshot) {
+                  if(snapshot.hasData) {
+                    final List<DocumentSnapshot> documents = snapshot.data!.docs;
+                    return ListView(
+                      children: documents.map((document) {
+                        return Card(
+                          child: ListTile(
+                            title: Text(document['text']),
+                            subtitle: Text(document['email']),
+                            // 自分の投稿の場合は、メッセージの削除ボタンを表示
+                            trailing: document['email'] == widget.user.email
+                                ? IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: () async {
+                                    await FirebaseFirestore.instance.collection('posts').doc(document.id).delete();
+                              },
+                            ) : null,
+                          ),
+                        );
+                      }
+                    ).toList(),
+                  );
+                }
+                return const Center(
+                  child: Text('読み込み中...'),
                 );
-              }
-              return const Center(
-                child: Text('読み込み中...'),
-              );
-            },
-          ))
+              },
+            )
+          )
         ],
       ),
       floatingActionButton: FloatingActionButton(

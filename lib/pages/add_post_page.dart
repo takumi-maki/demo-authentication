@@ -33,7 +33,7 @@ class AddPostPage extends ConsumerWidget {
                 },
               ),
               const SizedBox(height: 8),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   child: const Text('投稿'),

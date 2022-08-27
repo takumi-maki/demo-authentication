@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:demo_authentication/pages/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,23 +14,6 @@ class ChatPage extends ConsumerWidget {
     final User user = ref.watch(userProvider.notifier).state!;
     final AsyncValue<QuerySnapshot> asyncPostQuery = ref.watch(postsQueryProvider);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('チャット'),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () async {
-              await FirebaseAuth.instance.signOut();
-              // ログイン画面に遷移 + チャット画面を破棄
-              await Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) {
-                    return const LoginPage();
-                  })
-              );
-            },
-          )
-        ],
-      ),
       body: Column(
         children: [
           Container(

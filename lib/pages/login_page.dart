@@ -1,3 +1,4 @@
+import 'package:demo_authentication/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -40,7 +41,7 @@ class LoginPage extends ConsumerWidget {
                 padding: const EdgeInsets.all(8),
                 child: Text(infoText),
               ),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
                   child: const Text('ユーザー登録'),
@@ -77,7 +78,7 @@ class LoginPage extends ConsumerWidget {
                         );
                         await Navigator.of(context).pushReplacement(
                             MaterialPageRoute(builder: (context) {
-                              return const ChatPage();
+                              return const HomePage();
                             }));
                       } catch (e) {
                         ref.read(infoTextProvider.notifier).state = 'ログインに失敗しました';

@@ -1,21 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../provider/app_provider.dart';
 
 
-class AddPostPage extends StatefulWidget {
-  const AddPostPage(this.user, {Key? key}) : super(key: key);
-  final User user;
-
-  @override
-  State<AddPostPage> createState() => _AddPostPageState();
-}
-
-class _AddPostPageState extends State<AddPostPage> {
-  String messageText = '';
+class AddPostPage extends ConsumerWidget {
+  const AddPostPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final User user = ref.watch(userProvider.notifier).state!;
+    final messageText = ref.watch(messageTextProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('チャット投稿'),
@@ -28,13 +26,10 @@ class _AddPostPageState extends State<AddPostPage> {
             children: <Widget>[
               TextFormField(
                 decoration: const InputDecoration(labelText: '投稿メッセージ'),
-
                 keyboardType: TextInputType.multiline,
                 maxLines: 3,
                 onChanged: (String value) {
-                  setState(() {
-                    messageText = value;
-                  });
+                  ref.read(messageTextProvider.notifier).state = value;
                 },
               ),
               const SizedBox(height: 8),
@@ -44,7 +39,7 @@ class _AddPostPageState extends State<AddPostPage> {
                   child: const Text('投稿'),
                   onPressed: () async {
                     final date = DateTime.now().toIso8601String();
-                    final email = widget.user.email;
+                    final email = user.email;
                     await FirebaseFirestore.instance.collection('posts').doc().set({
                       'text': messageText,
                       'email': email,

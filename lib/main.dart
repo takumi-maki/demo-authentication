@@ -1,9 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'pages/add_post_page.dart';
 import 'firebase_options.dart';
-import 'pages/chat_page.dart';
 import 'pages/login_page.dart';
 
 void main() async {
@@ -11,7 +10,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const ChatApp());
+  runApp(const ProviderScope(child: ChatApp()));
 }
 
 class ChatApp extends StatelessWidget {
@@ -20,11 +19,11 @@ class ChatApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Chat app',
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
-      ),
-      home: const LoginPage(),
+        title: 'Chat app',
+        theme: ThemeData(
+          primarySwatch: Colors.indigo,
+        ),
+        home: const LoginPage(),
     );
   }
 }

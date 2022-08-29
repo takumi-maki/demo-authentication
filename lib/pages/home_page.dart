@@ -1,3 +1,4 @@
+import 'package:demo_authentication/pages/check_list_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -38,28 +39,24 @@ class _HomePageState extends State<HomePage> {
                 Tab(text: 'test1'),
                 Tab(text: 'test2'),
                 Tab(text: 'test3'),
-                Tab(text: 'test4'),
+                Tab(text: 'check_list'),
                 Tab(text: 'chat'),
               ],
             ),
           ),
-          body: const TabBarView(
+          body: TabBarView(
             children: <Widget>[
-              Center(
+              const Center(
                 child: Text('test1', style: TextStyle(fontSize: 32.0)),
               ),
-              Center(
+              const Center(
                 child: Text('test2', style: TextStyle(fontSize: 32.0)),
               ),
-              Center(
+              const Center(
                 child: Text('test3', style: TextStyle(fontSize: 32.0)),
               ),
-              Center(
-                child: Text('test4', style: TextStyle(fontSize: 32.0)),
-              ),
-              Center(
-                child: ChatPage()
-              ),
+              CheckListPage(),
+              const ChatPage()
             ],
           ),
         )

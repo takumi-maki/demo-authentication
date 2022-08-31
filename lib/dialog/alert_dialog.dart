@@ -1,4 +1,3 @@
-import 'package:demo_authentication/pages/check_list_page.dart';
 import 'package:flutter/material.dart';
 
 Future<void> achieveAlertDialog(BuildContext context, String text) async {

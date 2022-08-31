@@ -1,9 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nil/nil.dart';
+
 import '../dialog/alert_dialog.dart';
-import '../provider/app_provider.dart';
 
 class CheckItem {
   String id;
@@ -49,9 +47,6 @@ class CheckListPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final User user = ref
-        .watch(userProvider.notifier)
-        .state!;
     return ListView(
       children: [
         DataTable(

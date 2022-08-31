@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,14 +10,14 @@ class ChatPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final User user = ref.watch(userProvider.notifier).state!;
+    final googleProvider = ref.watch(googleSignInProvider);
     final AsyncValue<QuerySnapshot> asyncPostQuery = ref.watch(postsQueryProvider);
     return Scaffold(
       body: Column(
         children: [
           Container(
             padding: const EdgeInsets.all(8),
-            child: Text('ログイン情報: ${user.email}'),
+            child: Text('ログイン情報: ${googleProvider.googleSignInAccount!.email}'),
           ),
           Expanded(
               child: asyncPostQuery.when(
@@ -28,9 +27,9 @@ class ChatPage extends ConsumerWidget {
                         return Card(
                           child: ListTile(
                             title: Text(document['text']),
-                            subtitle: Text(document['email']),
+                            subtitle: Text(document['displayName']),
                             // 自分の投稿の場合は、メッセージの削除ボタンを表示
-                            trailing: document['email'] == user.email
+                            trailing: document['userId'] == googleProvider.googleSignInAccount!.id
                                 ? IconButton(
                                   icon: const Icon(Icons.delete),
                                   onPressed: () async {

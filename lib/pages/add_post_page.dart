@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,10 +7,9 @@ import '../provider/app_provider.dart';
 
 class AddPostPage extends ConsumerWidget {
   const AddPostPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final User user = ref.watch(userProvider.notifier).state!;
+    final googleProvider = ref.watch(googleSignInProvider);
     final messageText = ref.watch(messageTextProvider);
 
     return Scaffold(
@@ -38,11 +36,13 @@ class AddPostPage extends ConsumerWidget {
                 child: ElevatedButton(
                   child: const Text('投稿'),
                   onPressed: () async {
+                    final userId = googleProvider.googleSignInAccount!.id;
                     final date = DateTime.now().toIso8601String();
-                    final email = user.email;
+                    final displayName = googleProvider.googleSignInAccount!.displayName;
                     await FirebaseFirestore.instance.collection('posts').doc().set({
+                      'userId': userId,
                       'text': messageText,
-                      'email': email,
+                      'displayName': displayName,
                       'date': date,
                     });
                     Navigator.of(context).pop();

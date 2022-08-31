@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'firebase_options.dart';
-import 'pages/login_page.dart';
+import 'pages/google_login_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,11 +19,11 @@ class ChatApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Chat app',
-        theme: ThemeData(
-          primarySwatch: Colors.indigo,
-        ),
-        home: const LoginPage(),
+      title: 'Chat app',
+      theme: ThemeData(
+        primarySwatch: Colors.indigo,
+      ),
+      home: const GoogleLoginPage(),
     );
   }
 }

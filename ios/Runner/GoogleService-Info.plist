@@ -6,8 +6,12 @@
 	<string>178894714744-7qm7fqi8uhh3tdgsih2arfl35qav75cc.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
 	<string>com.googleusercontent.apps.178894714744-7qm7fqi8uhh3tdgsih2arfl35qav75cc</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>178894714744-vnjr52edu7np6sssoo7l11mo8l8uo1o4.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyD7WAtQTZblwgTvliEYv_cZZ9dkptQuBk4</string>
+	<key>CFBundleIdentifier</key>
+	<string></string>
 	<key>GCM_SENDER_ID</key>
 	<string>178894714744</string>
 	<key>PLIST_VERSION</key>
@@ -19,16 +23,18 @@
 	<key>STORAGE_BUCKET</key>
 	<string>fir-demo-authentication.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:178894714744:ios:f1cbd80dc81f9cd9c1fa8d</string>
+	<key>DATABASE_URL</key>
+	<string>https://fir-demo-authentication-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>
